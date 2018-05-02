@@ -7,17 +7,27 @@ class App {
   private mongo: Mongo
 
   constructor () {
-    if (process.argv.length === 5) {
-      this.mongo = new Mongo(process.argv[3])
-      this.rabbit = new Rabbit(process.argv[4])
+    let mongoURL = 'mongodb://'
+    let rabbitURL = 'amqp://guest:guest@'
 
-      this.mongo.start()
-      this.rabbit.start()
-
-      this.mongo.subscribe(this.rabbit.onMessage)
+    if (process.env.MONGO_PORT_27017_TCP_ADDR && process.env.RABBIT_PORT_5672_TCP_ADDR) {
+      mongoURL += process.env.MONGO_PORT_27017_TCP_ADDR
+      rabbitURL += process.env.RABBIT_PORT_5672_TCP_ADDR
+    } else if (process.argv.length === 5) {
+      mongoURL += process.argv[3]
+      rabbitURL += process.argv[4]
     } else {
-      console.error('Arguments error : uses "node dist/app.js -- $mongo_url $rabbit_url"')
+      mongoURL += 'localhost'
+      rabbitURL += 'localhost'
     }
+
+    this.mongo = new Mongo(mongoURL)
+    this.rabbit = new Rabbit(rabbitURL)
+
+    this.mongo.start()
+    this.rabbit.start()
+
+    this.mongo.subscribe(this.rabbit.onMessage)
   }
 
 }
