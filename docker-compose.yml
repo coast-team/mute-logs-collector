@@ -3,6 +3,8 @@ services:
   mongo:
     image: mongo
     network_mode: bridge
+    volumes:
+      - ./mongodb:/data/db
 
   mongoexpress:
     image: mongo-express
