@@ -1,14 +1,38 @@
 version: "2"
 services:
+  mongo:
+    image: mongo
+    network_mode: bridge
+
+  mongoexpress:
+    image: mongo-express
+    ports:
+      - "8081:8081"
+    links:
+      - mongo
+    restart: on-failure
+    network_mode: bridge
+  
+  rabbit:
+    image: byteflair/rabbitmq-stomp
+    expose:
+      - "5672"
+    ports:
+      - "15672:15672"
+      - "15674:15674"
+    network_mode: bridge
+  
   node:
     image: "node:latest"
     user: "node"
     working_dir: /home/node/app
-    environment:
-      - NODE_ENV=production
     volumes:
       - ./:/home/node/app
     ports:
       - "3000:3000"
-    command: "node start.js"
+    links:
+      - mongo
+      - rabbit
+    command: "npm start"
+    restart: on-failure
     network_mode: bridge

@@ -16,7 +16,7 @@ class App {
 
       this.mongo.subscribe(this.rabbit.onMessage)
     } else {
-      console.log('Arguments error : uses "node dist/app.js -- $mongo_url $rabbit_url"')
+      console.error('Arguments error : uses "node dist/app.js -- $mongo_url $rabbit_url"')
     }
   }
 

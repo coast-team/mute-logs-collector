@@ -6,7 +6,7 @@
   "scripts": {
     "prebuild": "rm -rf dist",
     "build": "tsc --outDir dist/",
-    "start": "node dist/app.js -- mongodb://172.17.0.3/muteLogs amqp://guest:guest@172.17.0.5"
+    "start": "node dist/app.js -- mongodb://${MONGO_PORT_27017_TCP_ADDR} amqp://guest:guest@${RABBIT_PORT_5672_TCP_ADDR}"
   },
   "preferGlobal": true,
   "dependencies": {
