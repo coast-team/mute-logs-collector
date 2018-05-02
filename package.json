@@ -1,0 +1,25 @@
+{
+  "name": "mute-logs-transporter",
+  "version": "1.0.0",
+  "description": "Link between rabbitmq and mongodb database",
+  "author": "Cédric Enclos",
+  "scripts": {
+    "prebuild": "rm -rf dist",
+    "build": "tsc --outDir dist/",
+    "start": "node dist/app.js -- mongodb://172.17.0.3/muteLogs amqp://guest:guest@172.17.0.5"
+  },
+  "preferGlobal": true,
+  "dependencies": {
+    "amqplib": "~0.5.1",
+    "mongodb": "~3.0.7"
+  },
+  "devDependencies": {
+    "@types/amqplib": "^0.5.7",
+    "@types/mongodb": "^3.0.15",
+    "@types/node": "^8.5.7",
+    "rxjs": "^6.0.0",
+    "tslint": "^5.8.0",
+    "tslint-eslint-rules": "^4.1.1",
+    "typescript": "~2.4.2"
+  }
+}
