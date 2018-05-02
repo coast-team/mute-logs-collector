@@ -1,7 +1,7 @@
 {
-  "name": "mute-logs-transporter",
+  "name": "mute-logs-collector",
   "version": "1.0.0",
-  "description": "Link between rabbitmq and mongodb database",
+  "description": "Store mute logs from rabbitmq to mongodb",
   "author": "Cédric Enclos",
   "scripts": {
     "prebuild": "rm -rf dist",
