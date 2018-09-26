@@ -1,26 +1,28 @@
-version: "2"
+version: "3.2"
 services:
   mongo:
     image: mongo
-    network_mode: bridge
     volumes:
-      - ./mongodb:/data/db
+      - ./mongodb-dev:/data/db
 
   mongoexpress:
     image: mongo-express
     ports:
-      - "32000:8081"
-    links:
+      - target: 8081
+        published: 32000
+        mode: host
+    depends_on:
       - mongo
-    restart: on-failure
-    network_mode: bridge
 
   rabbit:
     image: byteflair/rabbitmq-stomp
     ports:
-      - "24000:15672"
-      - "23000:15674"
-    network_mode: bridge
+      - target: 15672
+        published: 24000
+        mode: host
+      - target: 15674
+        published: 23000
+        mode: host
 
   node:
     image: "node:latest"
@@ -28,9 +30,10 @@ services:
     working_dir: /home/node/app
     volumes:
       - ./:/home/node/app
-    links:
+    environment:
+      - MONGO_ADDR=mongo
+      - RABBIT_ADDR=rabbit
+    depends_on:
       - mongo
       - rabbit
     command: "npm start"
-    restart: on-failure
-    network_mode: bridge

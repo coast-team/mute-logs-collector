@@ -2,7 +2,6 @@ import { Mongo } from './mongo'
 import { Rabbit } from './rabbit'
 
 class App {
-
   private rabbit: Rabbit
   private mongo: Mongo
 
@@ -10,9 +9,9 @@ class App {
     let mongoURL = 'mongodb://'
     let rabbitURL = 'amqp://guest:guest@'
 
-    if (process.env.MONGO_PORT_27017_TCP_ADDR && process.env.RABBIT_PORT_5672_TCP_ADDR) {
-      mongoURL += process.env.MONGO_PORT_27017_TCP_ADDR
-      rabbitURL += process.env.RABBIT_PORT_5672_TCP_ADDR
+    if (process.env.MONGO_ADDR && process.env.RABBIT_ADDR) {
+      mongoURL += process.env.MONGO_ADDR
+      rabbitURL += process.env.RABBIT_ADDR
     } else if (process.argv.length === 5) {
       mongoURL += process.argv[3]
       rabbitURL += process.argv[4]
@@ -20,6 +19,8 @@ class App {
       mongoURL += 'localhost'
       rabbitURL += 'localhost'
     }
+
+    console.log('[NODE]', mongoURL, rabbitURL)
 
     this.mongo = new Mongo(mongoURL)
     this.rabbit = new Rabbit(rabbitURL)
@@ -29,7 +30,6 @@ class App {
 
     this.mongo.subscribe(this.rabbit.onMessage)
   }
-
 }
 
 const app = new App()
