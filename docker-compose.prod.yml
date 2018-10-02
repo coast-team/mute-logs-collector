@@ -4,25 +4,24 @@ services:
     image: mongo
     volumes:
       - ./mongodb:/data/db
+    ports:
+      - "127.0.0.1:31500:27017"
+    network_mode: bridge
 
   mongoexpress:
     image: mongo-express
     ports:
-      - target: 8081
-        published: 31000
-        mode: host
-    depends_on:
+      - "127.0.0.1:31000:8081"
+    links:
       - mongo
+    network_mode: bridge
 
   rabbit:
     image: byteflair/rabbitmq-stomp
     ports:
-      - target: 15672
-        published: 14000
-        mode: host
-      - target: 15674
-        published: 13000
-        mode: host
+      - "127.0.0.1:14000:15672"
+      - "127.0.0.1:13000:15674"
+    network_mode: bridge
 
   node:
     image: "node:latest"
@@ -33,7 +32,9 @@ services:
     environment:
       - MONGO_ADDR=mongo
       - RABBIT_ADDR=rabbit
-    depends_on:
+    links:
       - mongo
       - rabbit
     command: "npm start"
+    restart: "on-failure"
+    network_mode: bridge

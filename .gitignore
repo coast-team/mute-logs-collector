@@ -27,6 +27,7 @@
 
 # misc
 /mongodb
+/mongodb-dev
 /.sass-cache
 /connect.lock
 /coverage
