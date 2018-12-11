@@ -23,5 +23,4 @@ Then _my-data_ will be stored into the collection _my-collection_
 
 ## Standalone usage
 
-You can set _MONGO_PORT_27017_TCP_ADDR_ and _RABBIT_PORT_5672_TCP_ADDR_ environment variables or you can use the node app alone with the command `node dist/app.js -- $my-mongodb-addr $my-rabbitmq-addr`. By default mongodb and rabbitmq address will be `localhost`
-
+You can set _MONGO_ADDR_ and _RABBIT_ADDR_ environment variables or you can use the node app alone with the command `node dist/app.js -- $my-mongodb-addr $my-rabbitmq-addr`. By default mongodb and rabbitmq address will be `localhost`

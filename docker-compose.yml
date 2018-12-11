@@ -32,6 +32,9 @@ services:
       - ./:/home/node/app
     ports:
       - "3000:3000"
+    environment:
+      - MONGO_ADDR=mongo
+      - RABBIT_ADDR=rabbit
     links:
       - mongo
       - rabbit
