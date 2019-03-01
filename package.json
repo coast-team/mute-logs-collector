@@ -11,15 +11,15 @@
   "preferGlobal": true,
   "dependencies": {
     "amqplib": "~0.5.1",
-    "mongodb": "~3.0.7"
+    "mongodb": "~3.1.13"
   },
   "devDependencies": {
     "@types/amqplib": "^0.5.7",
     "@types/mongodb": "^3.0.15",
-    "@types/node": "^8.5.7",
+    "@types/node": "^11.9.6",
     "rxjs": "^6.0.0",
     "tslint": "^5.8.0",
-    "tslint-eslint-rules": "^4.1.1",
-    "typescript": "~2.4.2"
+    "tslint-eslint-rules": "^5.4.0",
+    "typescript": "~3.3.3333"
   }
 }
