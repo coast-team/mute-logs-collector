@@ -1,5 +1,7 @@
 # Mute-logs-collector
 
+[![Greenkeeper badge](https://badges.greenkeeper.io/coast-team/mute-logs-collector.svg)](https://greenkeeper.io/)
+
 ## Use with Docker
 
 `docker-compose up` to start all elements
